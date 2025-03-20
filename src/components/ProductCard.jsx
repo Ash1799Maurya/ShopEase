@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
         className="h-40 w-full object-cover rounded-md" 
       />
       <h3 className="text-lg font-bold mt-2">{product.title}</h3>
-      <p className="text-gray-700">${product.price}</p>
+      <p className="text-emerald-500 font-semibold">${product.price}</p>
       <div className="flex justify-between mt-2">
         <button 
           onClick={() => addToCart(product)} 
@@ -21,9 +21,6 @@ const ProductCard = ({ product }) => {
         >
           Add to Cart
         </button>
-        <Link to={`/product/${product.id}`} className="text-blue-500">
-          View Details
-        </Link>
       </div>
     </div>
   );

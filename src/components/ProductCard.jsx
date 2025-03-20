@@ -1,23 +1,30 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center transition-transform transform hover:scale-105">
+    <div className="border p-4 rounded-md shadow-md">
       <img 
-        src={product.image} 
+        src={product.images?.[0] || "https://via.placeholder.com/150"} 
         alt={product.title} 
-        className="w-32 h-40 object-contain"
+        className="h-40 w-full object-cover rounded-md" 
       />
-      <h3 className="text-lg font-semibold mt-3 text-center">{product.title}</h3>
-      <p className="text-green-600 font-bold mt-2">${product.price}</p>
-      <button 
-        onClick={() => addToCart(product)} 
-        className="mt-3 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
-      >
-        Add to Cart
-      </button>
+      <h3 className="text-lg font-bold mt-2">{product.title}</h3>
+      <p className="text-gray-700">${product.price}</p>
+      <div className="flex justify-between mt-2">
+        <button 
+          onClick={() => addToCart(product)} 
+          className="bg-blue-500 text-white px-3 py-1 rounded"
+        >
+          Add to Cart
+        </button>
+        <Link to={`/product/${product.id}`} className="text-blue-500">
+          View Details
+        </Link>
+      </div>
     </div>
   );
 };

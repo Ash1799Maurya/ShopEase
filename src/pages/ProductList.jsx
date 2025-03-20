@@ -4,26 +4,38 @@ import ProductCard from "../components/ProductCard";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("https://fakestoreapi.com/products")
+    axios
+      .get("https://api.escuelajs.co/api/v1/products")
       .then((res) => {
+        console.log("API Response:", res.data); 
         if (Array.isArray(res.data)) {
           setProducts(res.data);
         } else {
           console.error("API did not return an array:", res.data);
         }
       })
-      .catch((err) => console.error("Error fetching products:", err));
+      .catch((err) => console.error("Error fetching products:", err))
+      .finally(() => setLoading(false));
   }, []);
-
-  if (products.length === 0) return <h2 className="text-center text-2xl font-bold mt-10">Loading...</h2>;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      {loading ? (
+        [...Array(8)].map((_, i) => (
+          <div key={i} className="animate-pulse bg-gray-200 rounded-lg p-4">
+            <div className="w-full h-48 bg-gray-300 rounded-md"></div>
+            <div className="h-6 bg-gray-400 rounded mt-4 w-3/4"></div>
+            <div className="h-4 bg-gray-400 rounded mt-2 w-1/2"></div>
+          </div>
+        ))
+      ) : (
+        products.slice(0, 30).map((product) => ( 
+          <ProductCard key={product.id} product={product} />
+        ))
+      )}
     </div>
   );
 };

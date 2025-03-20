@@ -15,7 +15,7 @@ const Cart = () => {
           <div className="space-y-4">
             {cart.map((item) => (
               <div key={item.id} className="flex items-center justify-between bg-white shadow-md p-4 rounded-lg">
-                <img src={item.image} alt={item.title} className="w-16 h-16 object-cover rounded-md" />
+                <img src={item.images?.[0] || "https://via.placeholder.com/100"} alt={item.title} className="w-16 h-16 object-cover rounded-md" />
                 <div className="flex-1 ml-4">
                   <h3 className="font-semibold">{item.title}</h3>
                   <p className="text-gray-600">${item.price}</p>

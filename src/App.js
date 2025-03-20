@@ -10,14 +10,17 @@ const App = () => {
     <CartProvider>
       <Router>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<ProductList />} />
-          <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
+        <div className="pt-20">  
+          <Routes>
+            <Route path="/" element={<ProductList />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/cart" element={<Cart />} />
+          </Routes>
+        </div>
       </Router>
     </CartProvider>
   );
 };
 
 export default App;
+
